@@ -1,0 +1,32 @@
+lab 3 
+
+3-
+
+sudo vi .htacess
+a-
+RewriteEngine On
+RewriteCond "%{QUERY_STRING}" "^forbidden"
+RewriteRule "^(.*)$" "page1.html"  [L]
+
+b-
+RewriteEngine On
+RewriteCond %{QUERY_STRING} (.+)
+RewriteRule ^(.*)$ /web3/$1? [R=301,L]
+
+c-
+RewriteEngine On
+RewriteCond "%{QUERY_STRING}" "val"
+RewriteRule ^/page1.html$ /page2.html [R=301,L]
+
+d-
+RewriteEngine On
+RewriteCond %{QUERY_STRING} var=([^&]+)&([^&]+)
+RewriteRule ^([^?]+)$ /$1/%1/%2? [R=301,L]
+
+f-
+RewriteEngine On
+RewriteCond %{TIME_HOUR} >18
+RewriteRule ^(.*)$ /goodevening.html [L]
+
+RewriteCond %{TIME_HOUR} <6
+RewriteRule ^(.*)$ /goodmorning.html [L]
