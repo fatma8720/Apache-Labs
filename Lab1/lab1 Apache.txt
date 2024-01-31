@@ -1,0 +1,40 @@
+lab 1 
+
+3- 
+
+sudo htpasswd -c /etc/httpd/.htpasswd fatma
+
+sudo nano /etc/httpd/conf/httpd.conf
+<Directory "/var/www/html/testpassword">
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    AuthType Basic
+    AuthName "Secure data"
+    AuthUserFile /etc/httpd/.htpasswd
+    Require valid-user
+</Directory>
+
+
+sudo systemctl restart httpd
+
+
+4-
+sudo vi .htaccess
+
+<FilesMatch "\.pdf$">
+  AuthType Basic
+  AuthName "PDF Access"
+  AuthUserFile /etc/httpd/.htpasswd
+  Require valid-user
+</FilesMatch>
+
+sudo systemctl restart httpd
+
+sudo nano /etc/httpd/conf/httpd.conf
+
+<Directory "/var/www/html/web3">
+ Options Indexes FollowSymLinks
+    AllowOverride All
+</Directory>
+
+sudo systemctl restart httpd
